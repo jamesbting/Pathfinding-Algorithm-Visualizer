@@ -3,7 +3,7 @@ import Node from "./Node/Node";
 import {
   dijkstra,
   getNodesInShortestPathOrder,
-} from "../algorithms/dijsktra.js";
+} from "../Algorithms/dijsktra.js";
 
 import "./PathfindingVisualizer.css";
 
@@ -115,6 +115,7 @@ export default class PathfindingVisualizer extends Component {
     );
   }
 }
+
 const getInitialGrid = () => {
   const grid = [];
   for (let row = 0; row < 20; row++) {
