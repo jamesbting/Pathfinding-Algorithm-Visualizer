@@ -3,9 +3,11 @@ import Node from "./Node/Node";
 import {
   dijkstra,
   getNodesInShortestPathOrder,
-} from "../algorithms/dijsktra.js";
+  getAlgorithmDescription,
+} from "../Algorithms/dijsktra.js";
 
 import "./PathfindingVisualizer.css";
+import TopBar from "./TopBar";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -20,7 +22,6 @@ export default class PathfindingVisualizer extends Component {
       mouseIsPressed: false,
     };
   }
-
   componentDidMount() {
     const grid = getInitialGrid();
     this.setState({ grid });
@@ -78,12 +79,18 @@ export default class PathfindingVisualizer extends Component {
 
   render() {
     const { grid, mouseIsPressed } = this.state;
+    const description = getAlgorithmDescription();
 
     return (
       <>
+        {/* Make a top bar element */}
+        <TopBar text={"Pathfinding Algorithm Visualizer"}></TopBar>
+
+        {/* Make the button*/}
         <button onClick={() => this.visualizeDijkstra()}>
           Visualize Dijkstra's Algorithm
         </button>
+        <div className="algorithm-description">{description}</div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
@@ -115,6 +122,7 @@ export default class PathfindingVisualizer extends Component {
     );
   }
 }
+
 const getInitialGrid = () => {
   const grid = [];
   for (let row = 0; row < 20; row++) {
@@ -126,6 +134,7 @@ const getInitialGrid = () => {
   }
   return grid;
 };
+
 const createNode = (col, row) => {
   return {
     col,
