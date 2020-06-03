@@ -3,6 +3,7 @@ import Node from "./Node/Node";
 import {
   dijkstra,
   getNodesInShortestPathOrder,
+  getAlgorithmDescription,
 } from "../Algorithms/dijsktra.js";
 
 import "./PathfindingVisualizer.css";
@@ -78,6 +79,7 @@ export default class PathfindingVisualizer extends Component {
 
   render() {
     const { grid, mouseIsPressed } = this.state;
+    const description = getAlgorithmDescription();
 
     return (
       <>
@@ -88,6 +90,7 @@ export default class PathfindingVisualizer extends Component {
         <button onClick={() => this.visualizeDijkstra()}>
           Visualize Dijkstra's Algorithm
         </button>
+        <div className="algorithm-description">{description}</div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (

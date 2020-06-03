@@ -72,3 +72,7 @@ export function getNodesInShortestPathOrder(finishNode) {
   }
   return nodesInShortestPathOrder;
 }
+
+export function getAlgorithmDescription() {
+  return "Dijkstra's Algorithm is a greedy algorithm which guarantees the shortest path between two nodes, if it exists.";
+}
