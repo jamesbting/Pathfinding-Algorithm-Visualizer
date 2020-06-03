@@ -6,6 +6,7 @@ import {
 } from "../Algorithms/dijsktra.js";
 
 import "./PathfindingVisualizer.css";
+import TopBar from "./TopBar";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -20,7 +21,6 @@ export default class PathfindingVisualizer extends Component {
       mouseIsPressed: false,
     };
   }
-
   componentDidMount() {
     const grid = getInitialGrid();
     this.setState({ grid });
@@ -81,6 +81,10 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <>
+        {/* Make a top bar element */}
+        <TopBar text={"Pathfinding Algorithm Visualizer"}></TopBar>
+
+        {/* Make the button*/}
         <button onClick={() => this.visualizeDijkstra()}>
           Visualize Dijkstra's Algorithm
         </button>
@@ -127,6 +131,7 @@ const getInitialGrid = () => {
   }
   return grid;
 };
+
 const createNode = (col, row) => {
   return {
     col,

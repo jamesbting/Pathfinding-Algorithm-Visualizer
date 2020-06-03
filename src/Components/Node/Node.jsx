@@ -14,6 +14,7 @@ export default class Node extends Component {
       onMouseUp,
       row,
     } = this.props;
+    //ternary that returns if the node is a start node or finish node
     const extraClassName = isFinish
       ? "node-finish"
       : isStart
