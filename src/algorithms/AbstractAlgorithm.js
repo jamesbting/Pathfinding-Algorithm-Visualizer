@@ -7,4 +7,6 @@ export class AbstractAlgorithm {
   getNodesInShortestPathOrder(finishNode) {}
 
   getAlgorithmDescription() {}
+
+  getAlgorithmName() {}
 }
