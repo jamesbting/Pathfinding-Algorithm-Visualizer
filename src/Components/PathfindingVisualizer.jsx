@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
-import {
-  dijkstra,
-  getNodesInShortestPathOrder,
-  getAlgorithmDescription,
-} from "../Algorithms/dijsktra.js";
+import Dijkstra from "../Algorithms/Dijsktra.js";
 
 import "./PathfindingVisualizer.css";
-import TopBar from "./TopBar";
+import TopBar from "./TopBar/TopBar";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -20,6 +16,7 @@ export default class PathfindingVisualizer extends Component {
     this.state = {
       grid: [],
       mouseIsPressed: false,
+      algorithm: new Dijkstra(),
     };
   }
   componentDidMount() {
@@ -72,14 +69,20 @@ export default class PathfindingVisualizer extends Component {
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    const visitedNodesInOrder = this.state.algorithm.solve(
+      grid,
+      startNode,
+      finishNode
+    );
+    const nodesInShortestPathOrder = this.state.algorithm.getNodesInShortestPathOrder(
+      finishNode
+    );
     this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
   render() {
     const { grid, mouseIsPressed } = this.state;
-    const description = getAlgorithmDescription();
+    const description = this.state.algorithm.getAlgorithmDescription();
 
     return (
       <>
