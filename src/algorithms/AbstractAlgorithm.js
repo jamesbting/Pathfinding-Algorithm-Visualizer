@@ -4,9 +4,11 @@
 export class AbstractAlgorithm {
   solve(grid, startNode, finishNode) {}
 
-  getNodesInShortestPathOrder(finishNode) {}
+  getPath() {}
 
   getAlgorithmDescription() {}
 
   getAlgorithmName() {}
+
+  getVisitedNodesInOrder() {}
 }

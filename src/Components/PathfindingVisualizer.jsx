@@ -4,11 +4,14 @@ import Dijkstra from "../Algorithms/Dijkstra.js";
 
 import "./PathfindingVisualizer.css";
 import TopBar from "./TopBar/TopBar";
+import ASearch from "../Algorithms/ASearch";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 35;
+const NUM_ROWS = 20;
+const NUM_COLS = 50;
 
 export default class PathfindingVisualizer extends Component {
   constructor() {
@@ -69,15 +72,21 @@ export default class PathfindingVisualizer extends Component {
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const visitedNodesInOrder = this.state.algorithm.solve(
-      grid,
-      startNode,
-      finishNode
-    );
-    const nodesInShortestPathOrder = this.state.algorithm.getNodesInShortestPathOrder(
-      finishNode
-    );
-    this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+
+    const foundPath = this.state.algorithm.solve(grid, startNode, finishNode);
+    if (foundPath) {
+      const nodesInShortestPathOrder = this.state.algorithm.getPath();
+      const visitedNodesInOrder = this.state.algorithm.getVisitedNodesInOrder();
+      // const visitedNodesInOrder = this.state.algorithm.solve(
+      //   grid,
+      //   startNode,
+      //   finishNode
+      // );
+      // const nodesInShortestPathOrder = this.state.algorithm.getNodesInShortestPathOrder(
+      //   finishNode
+      // );
+      this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+    }
   }
 
   render() {
@@ -91,7 +100,19 @@ export default class PathfindingVisualizer extends Component {
 
         {/* Make the button*/}
         <button onClick={() => this.visualizeAlgorithm()}>
-          Visualize {this.state.algorithm.getAlgorithmName()} Algorithm
+          Visualize {this.state.algorithm.getAlgorithmName()}
+        </button>
+        {/* Not working, error after clicking twice */}
+        <button
+          onClick={() => {
+            if (this.state.algorithm instanceof Dijkstra) {
+              this.setState({ algorithm: new ASearch() });
+            } else if (this.state.algorithm instanceof ASearch) {
+              this.setState({ algorithm: new Dijkstra() });
+            }
+          }}
+        >
+          Change algorithm
         </button>
         <div className="algorithm-description">{description}</div>
         <div className="grid">
@@ -128,9 +149,9 @@ export default class PathfindingVisualizer extends Component {
 
 const getInitialGrid = () => {
   const grid = [];
-  for (let row = 0; row < 20; row++) {
+  for (let row = 0; row < NUM_ROWS; row++) {
     const currentRow = [];
-    for (let col = 0; col < 50; col++) {
+    for (let col = 0; col < NUM_COLS; col++) {
       currentRow.push(createNode(col, row));
     }
     grid.push(currentRow);

@@ -9,10 +9,13 @@ import { AbstractAlgorithm } from "./AbstractAlgorithm";
 export default class Dijkstra extends AbstractAlgorithm {
   constructor() {
     super();
-    this.name = "Dijkstra's";
+    this.name = "Dijkstra's Algorithm";
     this.description =
       "Dijkstra's Algorithm is a greedy algorithm which guarantees the shortest path between two nodes, if it exists.";
+    this.path = [];
+    this.visitedNodesInOrder = [];
   }
+
   solve(grid, startNode, finishNode) {
     const visitedNodesInOrder = [];
     startNode.distance = 0;
@@ -28,11 +31,18 @@ export default class Dijkstra extends AbstractAlgorithm {
 
       // If the closest node is at a distance of infinity,
       // we must be trapped and should therefore stop.
-      if (closestNode.distance === Infinity) return visitedNodesInOrder;
-
+      if (closestNode.distance === Infinity) {
+        this.visitedNodesInOrder = visitedNodesInOrder;
+        this.getNodesInShortestPathOrder(finishNode);
+        return true;
+      }
       closestNode.isVisited = true;
       visitedNodesInOrder.push(closestNode);
-      if (closestNode === finishNode) return visitedNodesInOrder;
+      if (closestNode === finishNode) {
+        this.visitedNodesInOrder = visitedNodesInOrder;
+        this.getNodesInShortestPathOrder(finishNode);
+        return true;
+      }
       this.updateUnvisitedNeighbors(closestNode, grid);
     }
   }
@@ -71,7 +81,7 @@ export default class Dijkstra extends AbstractAlgorithm {
   }
 
   // Backtracks from the finishNode to find the shortest path.
-  // Only works when called *after* the dijkstra method above.
+  // Only works when called *after* the solve method above.
   getNodesInShortestPathOrder(finishNode) {
     const nodesInShortestPathOrder = [];
     let currentNode = finishNode;
@@ -79,7 +89,7 @@ export default class Dijkstra extends AbstractAlgorithm {
       nodesInShortestPathOrder.unshift(currentNode);
       currentNode = currentNode.previousNode;
     }
-    return nodesInShortestPathOrder;
+    this.path = nodesInShortestPathOrder;
   }
 
   getAlgorithmDescription() {
@@ -87,5 +97,11 @@ export default class Dijkstra extends AbstractAlgorithm {
   }
   getAlgorithmName() {
     return this.name;
+  }
+  getPath() {
+    return this.path;
+  }
+  getVisitedNodesInOrder() {
+    return this.visitedNodesInOrder;
   }
 }
