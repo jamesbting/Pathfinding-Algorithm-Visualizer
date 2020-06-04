@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
 import Dijkstra from "../Algorithms/Dijkstra.js";
+import AlgorithmMenu from "./AlgorithmMenu/AlgorithmMenu";
 
 import "./PathfindingVisualizer.css";
 import TopBar from "./TopBar/TopBar";
-import ASearch from "../Algorithms/ASearch";
+import { Button } from "@material-ui/core";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -14,6 +15,7 @@ const NUM_ROWS = 20;
 const NUM_COLS = 50;
 
 export default class PathfindingVisualizer extends Component {
+  //constructor for the app, this class is the
   constructor() {
     super();
     this.state = {
@@ -21,7 +23,10 @@ export default class PathfindingVisualizer extends Component {
       mouseIsPressed: false,
       algorithm: new Dijkstra(),
     };
+    //bind this in the method changeAlgorithm to the current instance of the PathfindingVisualizer
+    this.algorithmChangeHandler = this.changeAlgorithm.bind(this);
   }
+
   componentDidMount() {
     const grid = getInitialGrid();
     this.setState({ grid });
@@ -42,6 +47,7 @@ export default class PathfindingVisualizer extends Component {
     this.setState({ mouseIsPressed: false });
   }
 
+  //function that animates the algorihm
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
@@ -58,6 +64,7 @@ export default class PathfindingVisualizer extends Component {
     }
   }
 
+  //
   animateShortestPath(nodesInShortestPathOrder) {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
       setTimeout(() => {
@@ -77,73 +84,80 @@ export default class PathfindingVisualizer extends Component {
     if (foundPath) {
       const nodesInShortestPathOrder = this.state.algorithm.getPath();
       const visitedNodesInOrder = this.state.algorithm.getVisitedNodesInOrder();
-      // const visitedNodesInOrder = this.state.algorithm.solve(
-      //   grid,
-      //   startNode,
-      //   finishNode
-      // );
-      // const nodesInShortestPathOrder = this.state.algorithm.getNodesInShortestPathOrder(
-      //   finishNode
-      // );
       this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+      return true;
+    } else {
+      return false;
     }
   }
 
   render() {
     const { grid, mouseIsPressed } = this.state;
-    const description = this.state.algorithm.getAlgorithmDescription();
+    console.log(this.state.algorithm);
+    const description = this.state.algorithm.description;
 
     return (
-      <>
+      <div className="app">
         {/* Make a top bar element */}
         <TopBar text={"Pathfinding Algorithm Visualizer"}></TopBar>
 
-        {/* Make the button*/}
-        <button onClick={() => this.visualizeAlgorithm()}>
-          Visualize {this.state.algorithm.getAlgorithmName()}
-        </button>
-        {/* Not working, error after clicking twice */}
-        <button
-          onClick={() => {
-            if (this.state.algorithm instanceof Dijkstra) {
-              this.setState({ algorithm: new ASearch() });
-            } else if (this.state.algorithm instanceof ASearch) {
-              this.setState({ algorithm: new Dijkstra() });
-            }
-          }}
-        >
-          Change algorithm
-        </button>
-        <div className="algorithm-description">{description}</div>
-        <div className="grid">
-          {grid.map((row, rowIdx) => {
-            return (
-              <div key={rowIdx}>
-                {row.map((node, nodeIdx) => {
-                  const { row, col, isFinish, isStart, isWall } = node;
-                  return (
-                    <Node
-                      key={nodeIdx}
-                      col={col}
-                      isFinish={isFinish}
-                      isStart={isStart}
-                      isWall={isWall}
-                      mouseIsPressed={mouseIsPressed}
-                      onMouseDown={(row, col) => this.handleMouseDown(row, col)}
-                      onMouseEnter={(row, col) =>
-                        this.handleMouseEnter(row, col)
-                      }
-                      onMouseUp={() => this.handleMouseUp()}
-                      row={row}
-                    ></Node>
-                  );
-                })}
-              </div>
-            );
-          })}
+        {/* Solve the problem button*/}
+        <div className="options">
+          <Button
+            variant="outlined"
+            onClick={() => {
+              const foundPath = this.visualizeAlgorithm();
+              if (!foundPath) {
+                //do something
+              }
+            }}
+          >
+            Visualize {this.state.algorithm.getAlgorithmName()}
+          </Button>
+          {/* Selecting algorithm menu */}
+          <AlgorithmMenu handler={this.algorithmChangeHandler}></AlgorithmMenu>
+
+          {/* A sentence describing the algorithm */}
+          <div className="algorithm-description">{description}</div>
+
+          {/* The grid */}
+          <div className="grid">
+            {grid.map((row, rowIdx) => {
+              return (
+                <div key={rowIdx}>
+                  {row.map((node, nodeIdx) => {
+                    const { row, col, isFinish, isStart, isWall } = node;
+                    return (
+                      <Node
+                        key={nodeIdx}
+                        col={col}
+                        isFinish={isFinish}
+                        isStart={isStart}
+                        isWall={isWall}
+                        mouseIsPressed={mouseIsPressed}
+                        onMouseDown={(row, col) =>
+                          this.handleMouseDown(row, col)
+                        }
+                        onMouseEnter={(row, col) =>
+                          this.handleMouseEnter(row, col)
+                        }
+                        onMouseUp={() => this.handleMouseUp()}
+                        row={row}
+                      ></Node>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </>
+      </div>
     );
+  }
+
+  //function that changes the algorithm
+  changeAlgorithm(newAlgorithm) {
+    this.setState({ algorithm: newAlgorithm });
   }
 }
 
