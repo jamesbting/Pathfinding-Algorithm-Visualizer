@@ -104,7 +104,8 @@ export default class PathfindingVisualizer extends Component {
         {/* Solve the problem button*/}
         <div className="options">
           <Button
-            variant="outlined"
+            variant="contained"
+            color="primary"
             onClick={() => {
               const foundPath = this.visualizeAlgorithm();
               if (!foundPath) {
@@ -115,41 +116,42 @@ export default class PathfindingVisualizer extends Component {
             Visualize {this.state.algorithm.getAlgorithmName()}
           </Button>
           {/* Selecting algorithm menu */}
-          <AlgorithmMenu handler={this.algorithmChangeHandler}></AlgorithmMenu>
+          <AlgorithmMenu
+            handler={this.algorithmChangeHandler}
+            variant="contained"
+            color="primary"
+          ></AlgorithmMenu>
+        </div>
+        {/* A sentence describing the algorithm */}
+        <div className="algorithm-description">{description}</div>
 
-          {/* A sentence describing the algorithm */}
-          <div className="algorithm-description">{description}</div>
-
-          {/* The grid */}
-          <div className="grid">
-            {grid.map((row, rowIdx) => {
-              return (
-                <div key={rowIdx}>
-                  {row.map((node, nodeIdx) => {
-                    const { row, col, isFinish, isStart, isWall } = node;
-                    return (
-                      <Node
-                        key={nodeIdx}
-                        col={col}
-                        isFinish={isFinish}
-                        isStart={isStart}
-                        isWall={isWall}
-                        mouseIsPressed={mouseIsPressed}
-                        onMouseDown={(row, col) =>
-                          this.handleMouseDown(row, col)
-                        }
-                        onMouseEnter={(row, col) =>
-                          this.handleMouseEnter(row, col)
-                        }
-                        onMouseUp={() => this.handleMouseUp()}
-                        row={row}
-                      ></Node>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
+        {/* The grid */}
+        <div className="grid">
+          {grid.map((row, rowIdx) => {
+            return (
+              <div key={rowIdx}>
+                {row.map((node, nodeIdx) => {
+                  const { row, col, isFinish, isStart, isWall } = node;
+                  return (
+                    <Node
+                      key={nodeIdx}
+                      col={col}
+                      isFinish={isFinish}
+                      isStart={isStart}
+                      isWall={isWall}
+                      mouseIsPressed={mouseIsPressed}
+                      onMouseDown={(row, col) => this.handleMouseDown(row, col)}
+                      onMouseEnter={(row, col) =>
+                        this.handleMouseEnter(row, col)
+                      }
+                      onMouseUp={() => this.handleMouseUp()}
+                      row={row}
+                    ></Node>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
