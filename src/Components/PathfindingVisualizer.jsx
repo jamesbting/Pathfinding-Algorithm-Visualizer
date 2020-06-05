@@ -120,6 +120,7 @@ export default class PathfindingVisualizer extends Component {
             handler={this.algorithmChangeHandler}
             variant="contained"
             color="primary"
+            title="Select an algorithm"
           ></AlgorithmMenu>
         </div>
         {/* A sentence describing the algorithm */}

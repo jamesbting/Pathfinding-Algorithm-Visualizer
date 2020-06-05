@@ -43,7 +43,7 @@ export default function AlgorithmMenu(props) {
         variant={props.variant}
         color={props.color}
       >
-        Open Menu
+        {props.title}
       </Button>
       <Menu
         className="menu"
