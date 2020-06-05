@@ -15,6 +15,7 @@ export default class TopBar extends Component {
             {createInformationBox("Finish")}
             {createInformationBox("Wall")}
             {createInformationBox("Path")}
+            {createInformationBox("Visited")}
             {createInformationBox("Regular")}
           </div>
         </div>
@@ -27,6 +28,7 @@ const createInformationBox = (type) => {
   const isFinish = type === "Finish";
   const isWall = type === "Wall";
   const isPath = type === "Path";
+  const isVisited = type === "Visited";
   return (
     <InformationBox
       informationType={`${type}-node`}
@@ -37,6 +39,7 @@ const createInformationBox = (type) => {
           isFinish={isFinish}
           isWall={isWall}
           isPath={isPath}
+          isVisited={isVisited}
         ></StaticNode>
       }
     ></InformationBox>

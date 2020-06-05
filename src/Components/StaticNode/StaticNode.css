@@ -20,3 +20,7 @@
 .node-path {
   background-color: rgb(255, 254, 106);
 }
+
+.node-visited {
+  background-color: rgba(0, 190, 218, 0.75);
+}
