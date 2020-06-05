@@ -1,3 +1,4 @@
+// function that returns a div that is an algorithm menu, allowing the user to select an algorithm
 import React from "react";
 import Dijkstra from "../../Algorithms/Dijkstra.js";
 import ASearch from "../../Algorithms/ASearch";
@@ -8,6 +9,7 @@ import { Menu, Button, MenuItem } from "@material-ui/core";
 import "./AlgorithmMenu.css";
 
 export default function AlgorithmMenu(props) {
+  //set the style for the menu
   const useStyles = makeStyles((theme) => ({
     root: {
       "& > *": {
@@ -26,7 +28,7 @@ export default function AlgorithmMenu(props) {
     setAnchorEl(null);
   };
 
-  //if the user has selected an option
+  //if the user has selected an option, change the algorithm and
   const handleSelect = (algorithm) => {
     const changeAlgorithm = props.handler;
     setAnchorEl(null);
@@ -36,6 +38,7 @@ export default function AlgorithmMenu(props) {
 
   return (
     <div className={classes.root}>
+      {/*  Button that controls the opening and closing of the menu */}
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
@@ -53,7 +56,7 @@ export default function AlgorithmMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem>Select an algorithm</MenuItem>
+        {/* To add more items, simply import the algorithm, and then call handleSelect with a new instance of the algorithm as a parameter */}
         <MenuItem onClick={() => handleSelect(new Dijkstra())}>
           Dijkstra's Algorithm
         </MenuItem>

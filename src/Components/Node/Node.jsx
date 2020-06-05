@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import "./Node.css";
 
+//class that represents the node class, which, in aggregate forms the grid class
 export default class Node extends Component {
   render() {
     const {

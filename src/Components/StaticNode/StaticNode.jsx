@@ -5,7 +5,7 @@ import "./StaticNode.css";
 export default class StaticNode extends Component {
   render() {
     const { isFinish, isStart, isWall, isPath, isVisited } = this.props;
-    //ternary that returns if the node is a start node or finish node
+    //ternary that create an extra classname for CSS coloring.
     const extraClassName = isFinish
       ? "node-finish"
       : isStart

@@ -6,11 +6,11 @@ export default class ASearch extends AbstractAlgorithm {
     super();
     this.name = "A* Search Algorithm";
     this.description =
-      "A* Search is a greedy best-first-search algorithm that is based on Dijkstra's Algorithm. This one uses the Manhattan heuristic to determine which noes to search through.";
+      "A* Search is a greedy best-first-search algorithm that is based on Dijkstra's Algorithm. This one uses the Manhattan heuristic to determine which noes to search through. This means that the path is allowed to move up, down, left and right, but is not allowed to move diagonally";
     this.path = [];
     this.visitedNodesInOrder = [];
   }
-  //TODO: Fix bug where it dosent find the path - it dont work
+
   solve(grid, startNode, finishNode) {
     //initialize open and closed list, and make a grid where each node has a h,f,g value
     const currGrid = this.getGrid(grid);
@@ -28,6 +28,7 @@ export default class ASearch extends AbstractAlgorithm {
 
       closedList.push(currentNode);
 
+      //we are at the finish node, the path is found
       if (this.equals(currentNode, finishNode)) {
         const path = [];
         var current = currentNode;
@@ -37,15 +38,19 @@ export default class ASearch extends AbstractAlgorithm {
         }
         path.reverse();
         this.path = path;
+        console.log("done");
         return true;
       }
 
+      //this node is not the end, find the neighbours
       const children = this.getNeighbors(currentNode, currGrid);
       for (var i = 0; i < children.length; i++) {
         const child = children[i];
+        //if this node has been visited or it is a wall, then skip
         if (closedList.includes(child) || child.isWall) {
           continue;
         }
+
         child.parent = currentNode;
         child.g = currentNode.g + 1;
         child.h = this.ManhattanHeuristic(child, finishNode);
@@ -90,6 +95,7 @@ export default class ASearch extends AbstractAlgorithm {
     return neighbors;
   }
 
+  //if changed heuristics is desired, then
   ManhattanHeuristic(nodeA, nodeB) {
     return Math.abs(nodeA.row - nodeB.row) + Math.abs(nodeA.col - nodeB.col);
   }

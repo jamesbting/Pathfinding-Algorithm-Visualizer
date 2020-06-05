@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Node from "../Node/Node";
-
+//default start and end nodes
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 35;
-
+//default number of rows and cols
 const NUM_ROWS = 20;
 const NUM_COLS = 50;
 
@@ -19,6 +19,7 @@ export default class Grid extends Component {
       algorithm: null,
       mouseIsPressed: false,
     };
+    //bind the "this" keyword to the grid object in the following methods
     this.algorithmChangeHandler = this.changeAlgorithm.bind(this);
     this.visualizeAlgorithm = this.visualizeAlgorithm.bind(this);
   }
@@ -65,6 +66,7 @@ export default class Grid extends Component {
     }
   }
 
+  //returns a boolean based on if a path was found or not
   visualizeAlgorithm() {
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
@@ -90,9 +92,7 @@ export default class Grid extends Component {
   }
 
   render() {
-    //this.setState({ algorithm: this.props.algorithm });
     const { mouseIsPressed } = this.state;
-    console.log(this.state.algorithm);
     return (
       <div className="grid">
         {this.state.grid.map((row, rowIdx) => {
@@ -121,11 +121,13 @@ export default class Grid extends Component {
       </div>
     );
   }
+  //function that modifies the current state of the solver, in order to support functionality for multiple algorithms
   changeAlgorithm(newAlgorithm) {
     this.setState({ algorithm: newAlgorithm });
   }
 }
 
+//function that initializes the grid
 const getInitialGrid = () => {
   const grid = [];
   for (let row = 0; row < NUM_ROWS; row++) {
@@ -138,6 +140,7 @@ const getInitialGrid = () => {
   return grid;
 };
 
+//function that creates a new node component
 const createNode = (col, row) => {
   return {
     col,

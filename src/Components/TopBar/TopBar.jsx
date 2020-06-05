@@ -4,6 +4,7 @@ import StaticNode from "../StaticNode/StaticNode";
 
 import "./TopBar.css";
 
+//class that represents the top portion above the grid, and is an container for the static node classes
 export default class TopBar extends Component {
   render() {
     return (

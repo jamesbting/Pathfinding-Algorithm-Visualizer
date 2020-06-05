@@ -9,7 +9,7 @@ import AlgorithmMenu from "./AlgorithmMenu/AlgorithmMenu";
 import Grid from "./Grid/Grid";
 
 export default class PathfindingVisualizer extends Component {
-  //constructor for the app, this class is the
+  //constructor for the app, this class is an aggregate for all the different components and serves as the communicator between all the different classes
   constructor() {
     super();
     this.state = {

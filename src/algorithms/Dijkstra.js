@@ -82,6 +82,7 @@ export default class Dijkstra extends AbstractAlgorithm {
 
   // Backtracks from the finishNode to find the shortest path.
   // Only works when called *after* the solve method above.
+  //updates the path attribute
   getNodesInShortestPathOrder(finishNode) {
     const nodesInShortestPathOrder = [];
     let currentNode = finishNode;
