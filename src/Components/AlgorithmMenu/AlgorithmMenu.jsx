@@ -2,6 +2,7 @@
 import React from "react";
 import Dijkstra from "../../Algorithms/Dijkstra.js";
 import ASearch from "../../Algorithms/ASearch";
+import DepthFirstSearch from "../../Algorithms/DepthFirstSearch";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Menu, Button, MenuItem } from "@material-ui/core";
@@ -62,6 +63,9 @@ export default function AlgorithmMenu(props) {
         </MenuItem>
         <MenuItem onClick={() => handleSelect(new ASearch())}>
           A * Search
+        </MenuItem>
+        <MenuItem onClick={() => handleSelect(new DepthFirstSearch())}>
+          Depth First Search
         </MenuItem>
       </Menu>
     </div>

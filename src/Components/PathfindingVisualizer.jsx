@@ -57,6 +57,20 @@ export default class PathfindingVisualizer extends Component {
           setClick={(click) => (this.clickChild = click)}
           changeAlgorithm={this.changeAlgorithm}
         ></Grid>
+        {/* Some credits */}
+        <div className="BottomBox">
+          <p>
+            This React app was created by James Ting. Check out the source code
+            on{" "}
+            <a
+              href="https://github.com/jamesbting/Pathfinding-Algorithm-Visualizer"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github
+            </a>
+          </p>
+        </div>
       </div>
     );
   }

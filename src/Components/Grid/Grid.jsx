@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Node from "../Node/Node";
 //default start and end nodes
 const START_NODE_ROW = 10;
-const START_NODE_COL = 15;
+const START_NODE_COL = 5;
 const FINISH_NODE_ROW = 10;
-const FINISH_NODE_COL = 35;
+const FINISH_NODE_COL = 45;
 //default number of rows and cols
 const NUM_ROWS = 20;
 const NUM_COLS = 50;
