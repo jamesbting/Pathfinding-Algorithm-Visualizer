@@ -1,4 +1,5 @@
 import { AbstractAlgorithm } from "./AbstractAlgorithm";
+import Heap from "../DataStructures/Heap";
 
 //use the Manhattan distance heuristic
 export default class ASearch extends AbstractAlgorithm {
@@ -14,19 +15,16 @@ export default class ASearch extends AbstractAlgorithm {
   solve(grid, startNode, finishNode) {
     //initialize open and closed list, and make a grid where each node has a h,f,g value
     const currGrid = this.getGrid(grid);
-    const openList = [];
-    const closedList = [];
+    const openList = new Heap();
 
     startNode.g = 0;
     startNode.f = 0;
     openList.push(startNode);
+    while (openList.heap.length > 1) {
+      const currentNode = openList.pop();
 
-    while (!!openList.length) {
-      this.sortNodesByF(openList);
-      const currentNode = openList.shift();
       this.visitedNodesInOrder.push(currentNode);
-
-      closedList.push(currentNode);
+      currentNode.closed = true;
 
       //we are at the finish node, the path is found
       if (this.equals(currentNode, finishNode)) {
@@ -38,7 +36,6 @@ export default class ASearch extends AbstractAlgorithm {
         }
         path.reverse();
         this.path = path;
-        console.log("done");
         return true;
       }
 
@@ -47,22 +44,24 @@ export default class ASearch extends AbstractAlgorithm {
       for (var i = 0; i < children.length; i++) {
         const child = children[i];
         //if this node has been visited or it is a wall, then skip
-        if (closedList.includes(child) || child.isWall) {
+        if (child.closed || child.isWall) {
           continue;
         }
 
+        //is possible node on the path, set g, h and f values then check if its in the open list
         child.parent = currentNode;
         child.g = currentNode.g + 1;
         child.h = this.ManhattanHeuristic(child, finishNode);
         child.f = child.g + child.h;
 
-        if (openList.includes(child)) {
-          const copy = openList.find((element) => this.equals(child, element));
+        if (openList.includesElement(child)) {
+          const copy = openList.findElement(child);
           if (copy.g < child.g) {
             continue;
           }
+        } else {
+          openList.push(child);
         }
-        openList.push(child);
       }
     }
     return false;
@@ -81,9 +80,9 @@ export default class ASearch extends AbstractAlgorithm {
     return nodeA.row === nodeB.row && nodeA.col === nodeB.col;
   }
 
-  sortNodesByF(nodes) {
-    nodes.sort((nodeA, nodeB) => nodeA.f - nodeB.f);
-  }
+  // sortNodesByF(nodes) {
+  //   nodes.sort((nodeA, nodeB) => nodeA.f - nodeB.f);
+  // }
 
   getNeighbors(node, grid) {
     const neighbors = [];
@@ -95,7 +94,7 @@ export default class ASearch extends AbstractAlgorithm {
     return neighbors;
   }
 
-  //if changed heuristics is desired, then
+  //if changed heuristics is desired, then you can simply add a function, and change it in the solve function above
   ManhattanHeuristic(nodeA, nodeB) {
     return Math.abs(nodeA.row - nodeB.row) + Math.abs(nodeA.col - nodeB.col);
   }
@@ -126,7 +125,14 @@ export default class ASearch extends AbstractAlgorithm {
     for (const row of grid) {
       const newRow = [];
       for (const node of row) {
-        newRow.push({ h: 0, f: 0, g: 0, isVisited: false, ...node });
+        newRow.push({
+          h: 0,
+          f: 0,
+          g: 0,
+          isVisited: false,
+          closed: false,
+          ...node,
+        });
       }
       newGrid.push(newRow);
     }
