@@ -80,9 +80,16 @@ export default class ASearch extends AbstractAlgorithm {
     return nodeA.row === nodeB.row && nodeA.col === nodeB.col;
   }
 
-  // sortNodesByF(nodes) {
-  //   nodes.sort((nodeA, nodeB) => nodeA.f - nodeB.f);
-  // }
+  buildPath(lastNode) {
+    const path = [];
+    var current = lastNode;
+    while (current != null) {
+      path.push(current);
+      current = current.parent;
+    }
+    path.reverse();
+    return path;
+  }
 
   getNeighbors(node, grid) {
     const neighbors = [];

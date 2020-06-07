@@ -11,7 +11,7 @@ export default class Dijkstra extends AbstractAlgorithm {
     super();
     this.name = "Dijkstra's Algorithm";
     this.description =
-      "Dijkstra's Algorithm is a greedy algorithm which guarantees the shortest path between two nodes, if it exists.";
+      "Dijkstra's Algorithm is a greedy algorithm that finds the shortest path between 2 nodes. For a given source node in the graph, the algorithm finds the shortest path between the current node and every other node. While simple and viable, it is possible to improve on it's performance with algorithms such as A * Search.";
     this.path = [];
     this.visitedNodesInOrder = [];
   }
