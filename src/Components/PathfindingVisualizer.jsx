@@ -2,11 +2,12 @@ import React, { Component } from "react";
 
 import "./PathfindingVisualizer.css";
 
-import TopBar from "./TopBar/TopBar";
-import { Button } from "@material-ui/core";
+import InformationBar from "./InformationBar/InformationBar";
+import { Button, Toolbar } from "@material-ui/core";
 import Dijkstra from "../Algorithms/Dijkstra.js";
 import AlgorithmMenu from "./AlgorithmMenu/AlgorithmMenu";
 import Grid from "./Grid/Grid";
+import TopBar from "./TopBar/TopBar";
 
 export default class PathfindingVisualizer extends Component {
   //constructor for the app, this class is an aggregate for all the different components and serves as the communicator between all the different classes
@@ -25,10 +26,16 @@ export default class PathfindingVisualizer extends Component {
     return (
       <div className="app">
         {/* Make a top bar element */}
-        <TopBar text={"Pathfinding Algorithm Visualizer"}></TopBar>
+        <TopBar
+          text={"Pathfinding Algorithm Visualizer"}
+          handler={this.algorithmChangeHandler}
+        ></TopBar>
+
+        {/* Make Information bar element */}
+        <InformationBar></InformationBar>
 
         {/* Solve the problem button*/}
-        <div className="options">
+        <Toolbar>
           <Button
             variant="contained"
             color="primary"
@@ -38,14 +45,12 @@ export default class PathfindingVisualizer extends Component {
           >
             Visualize {algorithm.getAlgorithmName()}
           </Button>
-          {/* Selecting algorithm menu */}
           <AlgorithmMenu
             handler={this.algorithmChangeHandler}
             variant="contained"
-            color="primary"
             title="Select an algorithm"
           ></AlgorithmMenu>
-        </div>
+        </Toolbar>
         {/* A sentence describing the algorithm */}
         <div className="algorithm-description">
           {algorithm.getAlgorithmDescription()}

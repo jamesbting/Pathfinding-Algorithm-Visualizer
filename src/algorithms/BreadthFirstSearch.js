@@ -5,7 +5,7 @@ export default class BreadthFirstSearch extends AbstractAlgorithm {
     super();
     this.name = "Breadth First Search";
     this.description =
-      "Breadth First Search (BFS) is an algorithm for traversing a graph that explores all neighbour nodes at the current level before continuing. This instance of Breadth First Search is implemented using a Queue";
+      "Breadth First Search (BFS) is an algorithm for traversing a graph that explores all neighbour nodes at the current level before continuing. This instance of Breadth First Search is implemented using a Queue.";
     this.path = [];
     this.visitedNodesInOrder = [];
   }
