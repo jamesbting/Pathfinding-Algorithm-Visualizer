@@ -65,8 +65,16 @@ export default class PathfindingVisualizer extends Component {
         {/* Some credits */}
         <div className="BottomBox">
           <p>
-            This React app was created by James Ting. Check out the source code
-            on{" "}
+            This React app was created by{" "}
+            <a
+              href="https://www.linkedin.com/in/james-b-ting/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              James Ting
+            </a>
+            as a personal project to learn React and JavaScript. Check out the
+            source code on{" "}
             <a
               href="https://github.com/jamesbting/Pathfinding-Algorithm-Visualizer"
               target="_blank"
