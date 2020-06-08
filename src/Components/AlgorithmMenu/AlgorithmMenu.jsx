@@ -2,7 +2,9 @@
 import React from "react";
 import Dijkstra from "../../Algorithms/Dijkstra.js";
 import ASearch from "../../Algorithms/ASearch";
-import DepthFirstSearch from "../../Algorithms/DepthFirstSearch";
+import DepthFirstSearchIterative from "../../Algorithms/DepthFirstSearchIterative";
+import DepthFirstSearchRecursive from "../../Algorithms/DepthFirstSearchRecursive";
+import BreadthFirstSearch from "../../Algorithms/BreadthFirstSearch";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Menu, Button, MenuItem } from "@material-ui/core";
@@ -24,7 +26,7 @@ export default function AlgorithmMenu(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  //if the user hasnt selected an option, just close the menu
+  //if the user hasn't selected an option, just close the menu
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -64,9 +66,15 @@ export default function AlgorithmMenu(props) {
         <MenuItem onClick={() => handleSelect(new ASearch())}>
           A * Search
         </MenuItem>
-        <MenuItem onClick={() => handleSelect(new DepthFirstSearch())}>
-          Depth First Search
+        <MenuItem onClick={() => handleSelect(new DepthFirstSearchIterative())}>
+          Depth First Search (Iterative)
         </MenuItem>
+        <MenuItem onClick={() => handleSelect(new BreadthFirstSearch())}>
+          Breadth First Search
+        </MenuItem>
+        {/* <MenuItem onClick={() => handleSelect(new DepthFirstSearchRecursive())}>
+          Depth First Search (Recursive)
+        </MenuItem> */}
       </Menu>
     </div>
   );

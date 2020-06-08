@@ -1,46 +1,41 @@
 import { AbstractAlgorithm } from "./AbstractAlgorithm";
-import Stack from "../DataStructures/Stack";
-
-export default class DepthFirstSearch extends AbstractAlgorithm {
+/*NOT WORKING - It just goes to a corner and gets stuck there */
+export default class DepthFirstSearchRecursive extends AbstractAlgorithm {
   constructor() {
     super();
     this.name = "Depth First Search";
     this.description =
-      "Depth First Search (DFS) is an algorithm for traversing a graph that explores as far as possible along each branch before continuing. It is useful when the answer we are looking for is far away from the starting node that we are given. This particular instance of depth first search is implemented with a stack. Note it is also possible to implement DFS with recursion.";
+      "Depth First Search (DFS) is an algorithm for traversing a graph that explores as far as possible along each branch before continuing. It is useful when the answer we are looking for is far away from the starting node that we are given. This particular instance of depth first search is implemented recursion. Note it is also possible to implement DFS iteratively using a Stack.";
     this.path = [];
     this.visitedNodesInOrder = [];
   }
 
   solve(grid, startNode, finishNode) {
     const newGrid = this.getAllNodes(grid);
-    const stack = new Stack();
-    this.visitNode(startNode, stack);
-    while (!stack.isEmpty()) {
-      const u = stack.pop();
+    return this.traverse(newGrid, startNode, finishNode);
+  }
 
-      if (this.equals(u, finishNode)) {
-        this.path = this.buildPath(u);
-        return true;
+  traverse(grid, startNode, finishNode) {
+    console.log(startNode);
+    this.visitNode(startNode);
+    if (this.equals(startNode, finishNode)) {
+      this.path = this.buildPath(startNode);
+      return true;
+    }
+    const neighbors = this.getNeighbors(startNode, grid);
+    for (let i = 0; i < neighbors.length; i++) {
+      const w = neighbors[i];
+      //check if it has been visited already or if it is a wall
+      if (w.isVisited || w.isWall) {
+        continue;
       }
-
-      const neighbors = this.getNeighbors(u, newGrid);
-      for (let i = 0; i < neighbors.length; i++) {
-        const w = neighbors[i];
-        //check if it has been visited already or if it is a wall
-        if (w.isVisited || w.isWall) {
-          continue;
-        }
-        //not visited an not a wall, so valid node
-        this.visitNode(w, stack);
-        w.parent = u;
-        stack.push(w);
-      }
+      w.parent = startNode;
+      return this.traverse(grid, w, finishNode);
     }
     return false;
   }
 
-  visitNode(node, stack) {
-    stack.push(node);
+  visitNode(node) {
     this.visitedNodesInOrder.push(node);
     node.isVisited = true;
   }
