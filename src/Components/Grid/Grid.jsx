@@ -9,6 +9,9 @@ const FINISH_NODE_COL = 45;
 const NUM_ROWS = 20;
 const NUM_COLS = 50;
 
+const PATH_SPEEDS = [100, 50, 5];
+const VISITED_SPEEDS = [20, 10, 1];
+
 export default class Grid extends Component {
   constructor() {
     super();
@@ -18,9 +21,9 @@ export default class Grid extends Component {
       grid: [],
       algorithm: null,
       mouseIsPressed: false,
+      currentSpeed: 1,
     };
     //bind the "this" keyword to the grid object in the following methods
-    this.algorithmChangeHandler = this.changeAlgorithm.bind(this);
     this.visualizeAlgorithm = this.visualizeAlgorithm.bind(this);
   }
 
@@ -45,14 +48,14 @@ export default class Grid extends Component {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
+        }, VISITED_SPEEDS[this.state.currentSpeed] * i);
         return;
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`).className =
           "node node-visited";
-      }, 10 * i);
+      }, VISITED_SPEEDS[this.state.currentSpeed] * i);
     }
   }
 
@@ -62,7 +65,7 @@ export default class Grid extends Component {
         const node = nodesInShortestPathOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`).className =
           "node node-shortest-path";
-      }, 50 * i);
+      }, PATH_SPEEDS[this.state.currentSpeed] * i);
     }
   }
 
@@ -84,11 +87,18 @@ export default class Grid extends Component {
   }
   componentDidMount() {
     const grid = getInitialGrid();
-    this.setState({ grid, algorithm: this.props.algorithm });
+    this.setState({
+      grid,
+      algorithm: this.props.algorithm,
+      currentSpeed: this.props.speed,
+    });
     this.props.setClick(this.visualizeAlgorithm);
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({ algorithm: nextProps.algorithm });
+    this.setState({
+      algorithm: nextProps.algorithm,
+      currentSpeed: nextProps.speed,
+    });
   }
 
   render() {
@@ -121,10 +131,37 @@ export default class Grid extends Component {
       </div>
     );
   }
-  //function that modifies the current state of the solver, in order to support functionality for multiple algorithms
-  changeAlgorithm(newAlgorithm) {
-    this.setState({ algorithm: newAlgorithm });
+
+  //re render the grid after changing algorithms - not working at the moment
+  rebuildGrid(grid) {
+    for (let row = 0; row < grid.length; row++) {
+      for (let col = 0; col < grid[0].length; col++) {
+        const className = document.getElementById(`node-${row}-${col}`)
+          .className;
+        if (
+          className === "node node-shortest-path" ||
+          className === "node node-visited"
+        ) {
+          document.getElementById(`node-${row}-${col}`).className = "node";
+        }
+      }
+    }
   }
+
+  rebuildGrid = (grid) => {
+    for (let row = 0; row < grid.length; row++) {
+      for (let col = 0; col < grid[0].length; col++) {
+        const className = document.getElementById(`node-${row}-${col}`)
+          .className;
+        if (
+          className === "node node-shortest-path" ||
+          className === "node node-visited"
+        ) {
+          document.getElementById(`node-${row}-${col}`).className = "node";
+        }
+      }
+    }
+  };
 }
 
 //function that initializes the grid

@@ -8,6 +8,7 @@ import Dijkstra from "../Algorithms/Dijkstra.js";
 import AlgorithmMenu from "./AlgorithmMenu/AlgorithmMenu";
 import Grid from "./Grid/Grid";
 import TopBar from "./TopBar/TopBar";
+import SpeedMenu from "./SpeedMenu/SpeedMenu";
 
 export default class PathfindingVisualizer extends Component {
   //constructor for the app, this class is an aggregate for all the different components and serves as the communicator between all the different classes
@@ -15,27 +16,32 @@ export default class PathfindingVisualizer extends Component {
     super();
     this.state = {
       algorithm: new Dijkstra(),
+      speed: 1,
     };
     //bind this in the method changeAlgorithm to the current instance of the PathfindingVisualizer
     this.algorithmChangeHandler = this.changeAlgorithm.bind(this);
+    this.speedChangeHandler = this.changeSpeed.bind(this);
   }
 
   render() {
     const algorithm = this.state.algorithm;
+    const speed = this.state.speed;
 
     return (
       <div className="app">
         {/* Make a top bar element */}
-        <TopBar
-          text={"Pathfinding Algorithm Visualizer"}
-          handler={this.algorithmChangeHandler}
-        ></TopBar>
+        <TopBar text={"Pathfinding Algorithm Visualizer"}></TopBar>
 
         {/* Make Information bar element */}
         <InformationBar></InformationBar>
 
         {/* Solve the problem button*/}
         <Toolbar>
+          <AlgorithmMenu
+            handler={this.algorithmChangeHandler}
+            variant="contained"
+            title="Select an algorithm"
+          ></AlgorithmMenu>
           <Button
             variant="contained"
             color="primary"
@@ -45,11 +51,11 @@ export default class PathfindingVisualizer extends Component {
           >
             Visualize {algorithm.getAlgorithmName()}
           </Button>
-          <AlgorithmMenu
-            handler={this.algorithmChangeHandler}
+          <SpeedMenu
+            handler={this.speedChangeHandler}
             variant="contained"
-            title="Select an algorithm"
-          ></AlgorithmMenu>
+            title="Change Speeds"
+          ></SpeedMenu>
         </Toolbar>
         {/* A sentence describing the algorithm */}
         <div className="algorithm-description">
@@ -61,6 +67,8 @@ export default class PathfindingVisualizer extends Component {
           algorithm={algorithm}
           setClick={(click) => (this.clickChild = click)}
           changeAlgorithm={this.changeAlgorithm}
+          changeSpeed={this.changeSpeed}
+          speed={speed}
         ></Grid>
         {/* Some credits */}
         <div className="BottomBox">
@@ -72,7 +80,7 @@ export default class PathfindingVisualizer extends Component {
               rel="noopener noreferrer"
             >
               James Ting
-            </a>
+            </a>{" "}
             as a personal project to learn React and JavaScript. Check out the
             source code on{" "}
             <a
@@ -82,6 +90,7 @@ export default class PathfindingVisualizer extends Component {
             >
               Github
             </a>
+            .
           </p>
         </div>
       </div>
@@ -91,5 +100,9 @@ export default class PathfindingVisualizer extends Component {
   //function that changes the algorithm
   changeAlgorithm(newAlgorithm) {
     this.setState({ algorithm: newAlgorithm });
+  }
+
+  changeSpeed(newSpeed) {
+    this.setState({ speed: newSpeed });
   }
 }
