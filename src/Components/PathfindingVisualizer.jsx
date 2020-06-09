@@ -45,9 +45,7 @@ export default class PathfindingVisualizer extends Component {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => {
-              this.clickChild();
-            }}
+            onClick={() => this.clickChild()}
           >
             Visualize {algorithm.getAlgorithmName()}
           </Button>
