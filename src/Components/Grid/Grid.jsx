@@ -55,6 +55,11 @@ export default class Grid extends Component {
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
+        if (
+          document.getElementById(`node-${node.row}-${node.col}`).className ===
+          "node node-start"
+        )
+          return;
         document.getElementById(`node-${node.row}-${node.col}`).className =
           "node node-visited";
       }, VISITED_SPEEDS[this.state.currentSpeed] * i);
@@ -91,12 +96,17 @@ export default class Grid extends Component {
     });
     this.props.setClick(this.visualizeAlgorithm);
   }
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      algorithm: nextProps.algorithm,
-      currentSpeed: nextProps.speed,
-    });
-    this.rebuildGrid(this.state.grid);
+
+  static getDerivedStateFromProps(props, state) {
+    console.log(state);
+    if (props.speed !== state.currentSpeed) {
+      return { currentSpeed: props.speed };
+    } else if (props.algorithm !== state.algorithm) {
+      //ideally i would have like to compare if they are instances of the same class, but i'm not sure how to do that right now
+      Grid.rebuildGrid(state.grid);
+      return { algorithm: props.algorithm };
+    }
+    return null;
   }
 
   render() {
@@ -131,7 +141,7 @@ export default class Grid extends Component {
   }
 
   //re render the grid after changing algorithms - not working at the moment
-  rebuildGrid(grid) {
+  static rebuildGrid(grid) {
     for (let row = 0; row < grid.length; row++) {
       for (let col = 0; col < grid[0].length; col++) {
         const className = document.getElementById(`node-${row}-${col}`)
