@@ -43,9 +43,11 @@ export default class Grid extends Component {
   }
 
   //function that animates the algorithm
+  //does not change the start and end node so that the user can still see where the start and end is,
+  //and so when the grid is refreshed the start and end nodes aren't lost
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
-    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-      if (i === visitedNodesInOrder.length) {
+    for (let i = 1; i <= visitedNodesInOrder.length - 1; i++) {
+      if (i === visitedNodesInOrder.length - 1) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
         }, VISITED_SPEEDS[this.state.currentSpeed] * i);
@@ -60,7 +62,7 @@ export default class Grid extends Component {
   }
 
   animateShortestPath(nodesInShortestPathOrder) {
-    for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
+    for (let i = 1; i < nodesInShortestPathOrder.length - 1; i++) {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`).className =
@@ -75,7 +77,7 @@ export default class Grid extends Component {
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
 
-    const foundPath = this.state.algorithm.solve(grid, startNode, finishNode);
+    this.state.algorithm.solve(grid, startNode, finishNode);
     const nodesInShortestPathOrder = this.state.algorithm.getPath();
     const visitedNodesInOrder = this.state.algorithm.getVisitedNodesInOrder();
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
@@ -94,6 +96,7 @@ export default class Grid extends Component {
       algorithm: nextProps.algorithm,
       currentSpeed: nextProps.speed,
     });
+    this.rebuildGrid(this.state.grid);
   }
 
   render() {
@@ -133,7 +136,10 @@ export default class Grid extends Component {
       for (let col = 0; col < grid[0].length; col++) {
         const className = document.getElementById(`node-${row}-${col}`)
           .className;
-        if (
+        console.log(className);
+        if (className === "node node-start" || className === "node node-end") {
+          continue;
+        } else if (
           className === "node node-shortest-path" ||
           className === "node node-visited"
         ) {
@@ -142,21 +148,6 @@ export default class Grid extends Component {
       }
     }
   }
-
-  rebuildGrid = (grid) => {
-    for (let row = 0; row < grid.length; row++) {
-      for (let col = 0; col < grid[0].length; col++) {
-        const className = document.getElementById(`node-${row}-${col}`)
-          .className;
-        if (
-          className === "node node-shortest-path" ||
-          className === "node node-visited"
-        ) {
-          document.getElementById(`node-${row}-${col}`).className = "node";
-        }
-      }
-    }
-  };
 }
 
 //function that initializes the grid
