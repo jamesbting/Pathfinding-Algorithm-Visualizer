@@ -98,7 +98,6 @@ export default class Grid extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log(state);
     if (props.speed !== state.currentSpeed) {
       return { currentSpeed: props.speed };
     } else if (props.algorithm !== state.algorithm) {
