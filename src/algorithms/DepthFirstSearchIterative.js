@@ -6,7 +6,7 @@ export default class DepthFirstSearchIterative extends AbstractAlgorithm {
     super();
     this.name = "Depth First Search (Iterative)";
     this.description =
-      "Depth First Search (DFS) is an algorithm for traversing a graph that explores as far as possible along each branch before continuing. It is useful when the answer we are looking for is far away from the starting node that we are given. This particular instance of depth first search is implemented with a stack. Note it is also possible to implement DFS with recursion.";
+      "Depth First Search (DFS) is an algorithm for traversing a graph that explores as far as possible along each branch before continuing. It is useful when the answer we are looking for is far away from the starting node that we are given. This particular instance of depth first search is implemented with a stack, and does not guarantee the shortest path. Note it is also possible to implement DFS with recursion.";
     this.path = [];
     this.visitedNodesInOrder = [];
   }

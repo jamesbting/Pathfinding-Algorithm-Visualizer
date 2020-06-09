@@ -3,25 +3,23 @@ import { AbstractAlgorithm } from "./AbstractAlgorithm";
 export default class DepthFirstSearchRecursive extends AbstractAlgorithm {
   constructor() {
     super();
-    this.name = "Depth First Search";
+    this.name = "Depth First Search (Recursive)";
     this.description =
-      "Depth First Search (DFS) is an algorithm for traversing a graph that explores as far as possible along each branch before continuing. It is useful when the answer we are looking for is far away from the starting node that we are given. This particular instance of depth first search is implemented recursion. Note it is also possible to implement DFS iteratively using a Stack.";
+      "Depth First Search (DFS) is an algorithm for traversing a graph that explores as far as possible along each branch before continuing. It is useful when the answer we are looking for is far away from the starting node that we are given. This particular instance of depth first search is implemented with a recursive algorithm and does not guarantee the shortest path. Note it is also possible to implement DFS iteratively using a Stack.";
     this.path = [];
     this.visitedNodesInOrder = [];
   }
-
   solve(grid, startNode, finishNode) {
-    const newGrid = this.getAllNodes(grid);
-    return this.traverse(newGrid, startNode, finishNode);
+    const currGrid = this.getAllNodes(grid);
+    this.traverse(currGrid, startNode, finishNode);
   }
 
   traverse(grid, startNode, finishNode) {
-    console.log(startNode);
     this.visitNode(startNode);
     if (this.equals(startNode, finishNode)) {
       this.path = this.buildPath(startNode);
-      return true;
     }
+
     const neighbors = this.getNeighbors(startNode, grid);
     for (let i = 0; i < neighbors.length; i++) {
       const w = neighbors[i];
@@ -29,10 +27,10 @@ export default class DepthFirstSearchRecursive extends AbstractAlgorithm {
       if (w.isVisited || w.isWall) {
         continue;
       }
+
       w.parent = startNode;
-      return this.traverse(grid, w, finishNode);
+      this.traverse(grid, w, finishNode);
     }
-    return false;
   }
 
   visitNode(node) {

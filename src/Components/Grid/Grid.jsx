@@ -76,14 +76,9 @@ export default class Grid extends Component {
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
 
     const foundPath = this.state.algorithm.solve(grid, startNode, finishNode);
-    if (foundPath) {
-      const nodesInShortestPathOrder = this.state.algorithm.getPath();
-      const visitedNodesInOrder = this.state.algorithm.getVisitedNodesInOrder();
-      this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
-      return true;
-    } else {
-      return false;
-    }
+    const nodesInShortestPathOrder = this.state.algorithm.getPath();
+    const visitedNodesInOrder = this.state.algorithm.getVisitedNodesInOrder();
+    this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
   }
   componentDidMount() {
     const grid = getInitialGrid();
