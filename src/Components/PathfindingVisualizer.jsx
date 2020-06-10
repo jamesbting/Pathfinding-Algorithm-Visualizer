@@ -35,13 +35,15 @@ export default class PathfindingVisualizer extends Component {
         {/* Make Information bar element */}
         <InformationBar></InformationBar>
 
-        {/* Solve the problem button*/}
+        {/* Different buttons*/}
         <Toolbar>
+          {/* Select an algorithm menu */}
           <AlgorithmMenu
             handler={this.algorithmChangeHandler}
             variant="contained"
             title="Select an algorithm"
           ></AlgorithmMenu>
+          {/* Solve the problem button */}
           <Button
             variant="contained"
             color="primary"
@@ -49,6 +51,7 @@ export default class PathfindingVisualizer extends Component {
           >
             Visualize {algorithm.getAlgorithmName()}
           </Button>
+          {/* Select the speed menu */}
           <SpeedMenu
             handler={this.speedChangeHandler}
             variant="contained"
