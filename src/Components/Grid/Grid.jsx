@@ -145,7 +145,6 @@ export default class Grid extends Component {
       for (let col = 0; col < grid[0].length; col++) {
         const className = document.getElementById(`node-${row}-${col}`)
           .className;
-        console.log(className);
         if (className === "node node-start" || className === "node node-end") {
           continue;
         } else if (
