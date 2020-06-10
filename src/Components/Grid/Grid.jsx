@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Node from "../Node/Node";
+import MazeGenerator from "../../Algorithms/MazeGenerator";
+
 //default start and end nodes
 const START_NODE_ROW = 10;
 const START_NODE_COL = 5;
@@ -22,9 +24,11 @@ export default class Grid extends Component {
       algorithm: null,
       mouseIsPressed: false,
       currentSpeed: 1,
+      generator: new MazeGenerator(),
     };
     //bind the "this" keyword to the grid object in the following methods
     this.visualizeAlgorithm = this.visualizeAlgorithm.bind(this);
+    this.visualizeMaze = this.visualizeMaze.bind(this);
   }
 
   handleMouseDown(row, col) {
@@ -87,6 +91,33 @@ export default class Grid extends Component {
     const visitedNodesInOrder = this.state.algorithm.getVisitedNodesInOrder();
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
   }
+
+  visualizeMaze() {
+    const listOfWalls = this.state.generator.generate(
+      this.state.grid,
+      this.state.grid[0][0]
+    );
+    this.animateWalls(listOfWalls);
+  }
+
+  animateWalls(listOfWalls) {
+    for (let i = 0; i < listOfWalls.length; i++) {
+      setTimeout(() => {
+        const node = listOfWalls[i];
+        if (
+          document.getElementById(`node-${node.row}-${node.col}`).className ===
+            "node node-start" ||
+          document.getElementById(`node-${node.row}-${node.col}`).className ===
+            "node node-finish"
+        ) {
+          return;
+        }
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          "node node-wall";
+      }, PATH_SPEEDS[this.state.currentSpeed] * i);
+    }
+  }
+
   componentDidMount() {
     const grid = getInitialGrid();
     this.setState({
@@ -95,6 +126,7 @@ export default class Grid extends Component {
       currentSpeed: this.props.speed,
     });
     this.props.setClick(this.visualizeAlgorithm);
+    this.props.setClick(this.visualizeMaze);
   }
 
   static getDerivedStateFromProps(props, state) {

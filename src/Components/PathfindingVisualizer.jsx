@@ -26,6 +26,7 @@ export default class PathfindingVisualizer extends Component {
   render() {
     const algorithm = this.state.algorithm;
     const speed = this.state.speed;
+    const generator = this.state.generator;
 
     return (
       <div className="app">
@@ -51,6 +52,14 @@ export default class PathfindingVisualizer extends Component {
           >
             Visualize {algorithm.getAlgorithmName()}
           </Button>
+          {/* Generate a maze algorithm */}
+          {/* <Button
+            variant="contained"
+            color="primary"
+            onClick={() => this.clickChild()}
+          >
+            Generate a random maze
+          </Button> */}
           {/* Select the speed menu */}
           <SpeedMenu
             handler={this.speedChangeHandler}
@@ -70,6 +79,7 @@ export default class PathfindingVisualizer extends Component {
           changeAlgorithm={this.changeAlgorithm}
           changeSpeed={this.changeSpeed}
           speed={speed}
+          generator={generator}
         ></Grid>
         {/* Some credits */}
         <div className="BottomBox">
