@@ -17,7 +17,7 @@
     "upgrade": "^1.1.0",
     "yargs-parser": "^18.1.3"
   },
-  "homepage": "http://jamesbting.github.io/pathfinding-algorithm-visualizer",
+  "homepage": "https://jamesbting.github.io/pathfinding-algorithm-visualizer",
   "scripts": {
     "start": "react-scripts start",
     "predeploy": "npm run build",
