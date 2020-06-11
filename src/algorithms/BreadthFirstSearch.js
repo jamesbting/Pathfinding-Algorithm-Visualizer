@@ -2,12 +2,11 @@ import { AbstractAlgorithm } from "./AbstractAlgorithm";
 
 export default class BreadthFirstSearch extends AbstractAlgorithm {
   constructor() {
-    super();
-    this.name = "Breadth First Search";
-    this.description =
-      "Breadth First Search (BFS) is an algorithm for traversing a graph that explores all neighbor nodes at the current level before continuing. This instance of Breadth First Search is implemented using a Queue.";
-    this.path = [];
-    this.visitedNodesInOrder = [];
+    const description =
+      "Breadth First Search (BFS) is an algorithm for traversing a graph that explores all neighbor nodes at the current level before continuing. This instance of Breadth First Search is implemented using a Queue. It guarantees the shortest path on unweighted graphs";
+    const name = "Breadth First Search";
+    const link = "https://www.youtube.com/watch?v=oDqjPvD54Ss";
+    super(name, description, link);
   }
 
   solve(grid, startNode, finishNode) {
@@ -82,21 +81,5 @@ export default class BreadthFirstSearch extends AbstractAlgorithm {
   }
   equals(nodeA, nodeB) {
     return nodeA.row === nodeB.row && nodeA.col === nodeB.col;
-  }
-  //some getter methods to return properties of the object
-  getPath() {
-    return this.path;
-  }
-
-  getAlgorithmDescription() {
-    return this.description;
-  }
-
-  getAlgorithmName() {
-    return this.name;
-  }
-
-  getVisitedNodesInOrder() {
-    return this.visitedNodesInOrder;
   }
 }

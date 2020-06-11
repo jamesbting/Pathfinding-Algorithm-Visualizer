@@ -8,12 +8,11 @@ import { AbstractAlgorithm } from "./AbstractAlgorithm";
 //can improve the speed by using a min heap
 export default class Dijkstra extends AbstractAlgorithm {
   constructor() {
-    super();
-    this.name = "Dijkstra's Algorithm";
-    this.description =
+    const description =
       "Dijkstra's Algorithm is a greedy algorithm that finds the shortest path between 2 nodes. For a given source node in the graph, the algorithm finds the shortest path between the current node and every other node. While simple and viable, it is possible to improve on it's performance with algorithms such as A * Search.";
-    this.path = [];
-    this.visitedNodesInOrder = [];
+    const name = "Dijkstra's Algorithm";
+    const link = "https://youtu.be/GazC3A4OQTE";
+    super(name, description, link);
   }
 
   solve(grid, startNode, finishNode) {
@@ -91,18 +90,5 @@ export default class Dijkstra extends AbstractAlgorithm {
       currentNode = currentNode.previousNode;
     }
     this.path = nodesInShortestPathOrder;
-  }
-
-  getAlgorithmDescription() {
-    return this.description;
-  }
-  getAlgorithmName() {
-    return this.name;
-  }
-  getPath() {
-    return this.path;
-  }
-  getVisitedNodesInOrder() {
-    return this.visitedNodesInOrder;
   }
 }

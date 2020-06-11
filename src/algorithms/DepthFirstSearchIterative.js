@@ -3,12 +3,11 @@ import Stack from "../DataStructures/Stack";
 
 export default class DepthFirstSearchIterative extends AbstractAlgorithm {
   constructor() {
-    super();
-    this.name = "Depth First Search (Iterative)";
-    this.description =
+    const description =
       "Depth First Search (DFS) is an algorithm for traversing a graph that explores as far as possible along each branch before continuing. It is useful when the answer we are looking for is far away from the starting node that we are given. This particular instance of depth first search is implemented with a stack, and does not guarantee the shortest path. Note it is also possible to implement DFS with recursion.";
-    this.path = [];
-    this.visitedNodesInOrder = [];
+    const name = "Depth First Search (Iterative)";
+    const link = "https://www.youtube.com/watch?v=7fujbpJ0LB4";
+    super(name, description, link);
   }
 
   solve(grid, startNode, finishNode) {
@@ -83,21 +82,5 @@ export default class DepthFirstSearchIterative extends AbstractAlgorithm {
   }
   equals(nodeA, nodeB) {
     return nodeA.row === nodeB.row && nodeA.col === nodeB.col;
-  }
-  //some getter methods to return properties of the object
-  getPath() {
-    return this.path;
-  }
-
-  getAlgorithmDescription() {
-    return this.description;
-  }
-
-  getAlgorithmName() {
-    return this.name;
-  }
-
-  getVisitedNodesInOrder() {
-    return this.visitedNodesInOrder;
   }
 }

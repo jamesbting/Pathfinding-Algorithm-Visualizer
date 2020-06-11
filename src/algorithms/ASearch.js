@@ -4,12 +4,11 @@ import Heap from "../DataStructures/Heap";
 //use the Manhattan distance heuristic
 export default class ASearch extends AbstractAlgorithm {
   constructor() {
-    super();
-    this.name = "A* Search Algorithm";
-    this.description =
+    const description =
       "A* Search is a greedy best-first-search algorithm that is based on Dijkstra's Algorithm. This one uses the Manhattan heuristic to determine which noes to search through. This means that the path is allowed to move up, down, left and right, but is not allowed to move diagonally";
-    this.path = [];
-    this.visitedNodesInOrder = [];
+    const name = "A* Search Algorithm";
+    const link = "https://www.youtube.com/watch?v=ySN5Wnu88nE";
+    super(name, description, link);
   }
 
   solve(grid, startNode, finishNode) {
@@ -105,28 +104,8 @@ export default class ASearch extends AbstractAlgorithm {
   ManhattanHeuristic(nodeA, nodeB) {
     return Math.abs(nodeA.row - nodeB.row) + Math.abs(nodeA.col - nodeB.col);
   }
-  getPath() {
-    return this.path;
-  }
 
-  getAlgorithmDescription() {
-    return this.description;
-  }
-
-  getAlgorithmName() {
-    return this.name;
-  }
-
-  getNodesInShortestPathOrder(finishNode) {
-    const nodesInShortestPathOrder = [];
-    let currentNode = finishNode;
-    while (currentNode !== null) {
-      nodesInShortestPathOrder.unshift(currentNode);
-      currentNode = currentNode.previousNode;
-    }
-    this.path = nodesInShortestPathOrder;
-  }
-
+  //get a copy of the grid with objects that have an h,f,g property for the algorithm to solve
   getGrid(grid) {
     const newGrid = [];
     for (const row of grid) {
@@ -144,9 +123,5 @@ export default class ASearch extends AbstractAlgorithm {
       newGrid.push(newRow);
     }
     return newGrid;
-  }
-
-  getVisitedNodesInOrder() {
-    return this.visitedNodesInOrder;
   }
 }
