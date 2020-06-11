@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Node from "../Node/Node";
-import MazeGenerator from "../../Algorithms/MazeGenerator";
+//import MazeGenerator from "../../Algorithms/MazeGenerator";
 
 //default start and end nodes
 const START_NODE_ROW = 10;
 const START_NODE_COL = 5;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 45;
+
 //default number of rows and cols
 const NUM_ROWS = 20;
 const NUM_COLS = 50;
@@ -24,11 +25,11 @@ export default class Grid extends Component {
       algorithm: null,
       mouseIsPressed: false,
       currentSpeed: 1,
-      generator: new MazeGenerator(),
+      //generator: new MazeGenerator(),
     };
     //bind the "this" keyword to the grid object in the following methods
     this.visualizeAlgorithm = this.visualizeAlgorithm.bind(this);
-    this.visualizeMaze = this.visualizeMaze.bind(this);
+    //this.visualizeMaze = this.visualizeMaze.bind(this); //for the maze generator, not working
   }
 
   handleMouseDown(row, col) {
@@ -92,31 +93,33 @@ export default class Grid extends Component {
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
-  visualizeMaze() {
-    const listOfWalls = this.state.generator.generate(
-      this.state.grid,
-      this.state.grid[0][0]
-    );
-    this.animateWalls(listOfWalls);
-  }
+  //Code for visualizing maze - commented out because it isn't working right now
+  // visualizeMaze() {
+  //   const listOfWalls = this.state.generator.generate(
+  //     this.state.grid,
+  //     this.state.grid[0][0]
+  //   );
+  //   this.animateWalls(listOfWalls);
+  // }
 
-  animateWalls(listOfWalls) {
-    for (let i = 0; i < listOfWalls.length; i++) {
-      setTimeout(() => {
-        const node = listOfWalls[i];
-        if (
-          document.getElementById(`node-${node.row}-${node.col}`).className ===
-            "node node-start" ||
-          document.getElementById(`node-${node.row}-${node.col}`).className ===
-            "node node-finish"
-        ) {
-          return;
-        }
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node node-wall";
-      }, PATH_SPEEDS[this.state.currentSpeed] * i);
-    }
-  }
+  //animates the walls by changing the classnames - this is for the maze generation algorithm
+  // animateWalls(listOfWalls) {
+  //   for (let i = 0; i < listOfWalls.length; i++) {
+  //     setTimeout(() => {
+  //       const node = listOfWalls[i];
+  //       if (
+  //         document.getElementById(`node-${node.row}-${node.col}`).className ===
+  //           "node node-start" ||
+  //         document.getElementById(`node-${node.row}-${node.col}`).className ===
+  //           "node node-finish"
+  //       ) {
+  //         return;
+  //       }
+  //       document.getElementById(`node-${node.row}-${node.col}`).className =
+  //         "node node-wall";
+  //     }, PATH_SPEEDS[this.state.currentSpeed] * i);
+  //   }
+  // }
 
   componentDidMount() {
     const grid = getInitialGrid();
@@ -126,9 +129,10 @@ export default class Grid extends Component {
       currentSpeed: this.props.speed,
     });
     this.props.setClick(this.visualizeAlgorithm);
-    this.props.setClick(this.visualizeMaze);
+    //this.props.setClick(this.visualizeMaze);
   }
 
+  //used getDerivedStateFromProps since componentsDidUpdate() is deprecated
   static getDerivedStateFromProps(props, state) {
     if (props.speed !== state.currentSpeed) {
       return { currentSpeed: props.speed };
@@ -146,7 +150,7 @@ export default class Grid extends Component {
       <div className="grid">
         {this.state.grid.map((row, rowIdx) => {
           return (
-            <div key={rowIdx}>
+            <div id={rowIdx}>
               {row.map((node, nodeIdx) => {
                 const { row, col, isFinish, isStart, isWall } = node;
                 return (
@@ -171,7 +175,9 @@ export default class Grid extends Component {
     );
   }
 
-  //re render the grid after changing algorithms - not working at the moment
+  //re render the grid after changing algorithms
+  //sets the class name of all visited and path nodes to regular nodes, but leaves walls and the endpoint
+  //nodes as is
   static rebuildGrid(grid) {
     for (let row = 0; row < grid.length; row++) {
       for (let col = 0; col < grid[0].length; col++) {

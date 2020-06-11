@@ -69,7 +69,15 @@ export default class PathfindingVisualizer extends Component {
         </Toolbar>
         {/* A sentence describing the algorithm */}
         <div className="algorithm-description">
-          {algorithm.getAlgorithmDescription()}
+          {`${algorithm.getAlgorithmDescription()} To learn more about ${algorithm.getAlgorithmName()}, click `}
+          <a
+            href={algorithm.getLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            here
+          </a>
+          .
         </div>
 
         {/* The grid */}
