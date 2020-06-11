@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "./StaticNode.css";
+import "../Node/Node.css";
 /// class that represents a static node, that is used with the information box, to depict the different types of nodes
 export default class StaticNode extends Component {
   render() {
@@ -13,11 +13,11 @@ export default class StaticNode extends Component {
       : isWall
       ? "node-wall"
       : isPath
-      ? "node-path"
+      ? "node-shortest-path"
       : isVisited
       ? "node-visited"
       : "";
 
-    return <div className={`static-node ${extraClassName}`}></div>;
+    return <div className={`node ${extraClassName}`}></div>;
   }
 }
