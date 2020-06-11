@@ -20,10 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 function HideOnScroll(props) {
   const { children, window } = props;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
-  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+  const trigger = useScrollTrigger({ target: window });
 
   return (
     <Slide appear={false} direction="down" in={!trigger}>
@@ -43,12 +40,6 @@ export default function ButtonAppBar(props) {
             <Typography variant="h6" className={classes.title}>
               Pathfinding Algorithm Visualizer
             </Typography>
-            {/* Algorithm Menu button */}
-            {/* <AlgorithmMenu
-            handler={props.handler}
-            variant="contained"
-            title="Select an algorithm"
-          ></AlgorithmMenu> */}
           </Toolbar>
         </AppBar>
       </HideOnScroll>

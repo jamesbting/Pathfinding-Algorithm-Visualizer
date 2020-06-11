@@ -3,13 +3,13 @@ import Node from "../Node/Node";
 //import MazeGenerator from "../../Algorithms/MazeGenerator";
 
 //default start and end nodes
-const START_NODE_ROW = 10;
+const START_NODE_ROW = 15;
 const START_NODE_COL = 5;
-const FINISH_NODE_ROW = 10;
+const FINISH_NODE_ROW = 15;
 const FINISH_NODE_COL = 45;
 
 //default number of rows and cols
-const NUM_ROWS = 20;
+const NUM_ROWS = 30;
 const NUM_COLS = 50;
 
 const PATH_SPEEDS = [100, 50, 5];
