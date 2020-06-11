@@ -62,7 +62,9 @@ export default class Grid extends Component {
         const node = visitedNodesInOrder[i];
         if (
           document.getElementById(`node-${node.row}-${node.col}`).className ===
-          "node node-start"
+            "node node-start" ||
+          document.getElementById(`node-${node.row}-${node.col}`).className ===
+            "node node-finish"
         )
           return;
         document.getElementById(`node-${node.row}-${node.col}`).className =
@@ -135,6 +137,7 @@ export default class Grid extends Component {
   //used getDerivedStateFromProps since componentsDidUpdate() is deprecated
   static getDerivedStateFromProps(props, state) {
     if (props.speed !== state.currentSpeed) {
+      Grid.rebuildGrid(state.grid);
       return { currentSpeed: props.speed };
     } else if (props.algorithm !== state.algorithm) {
       //ideally i would have like to compare if they are instances of the same class, but i'm not sure how to do that right now
@@ -183,7 +186,10 @@ export default class Grid extends Component {
       for (let col = 0; col < grid[0].length; col++) {
         const className = document.getElementById(`node-${row}-${col}`)
           .className;
-        if (className === "node node-start" || className === "node node-end") {
+        if (
+          className === "node node-start" ||
+          className === "node node-finish"
+        ) {
           continue;
         } else if (
           className === "node node-shortest-path" ||
