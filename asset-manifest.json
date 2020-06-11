@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Pathfinding-Algorithm-Visualizer/static/css/main.3ad34645.chunk.css",
-    "main.js": "/Pathfinding-Algorithm-Visualizer/static/js/main.be6d1956.chunk.js",
-    "main.js.map": "/Pathfinding-Algorithm-Visualizer/static/js/main.be6d1956.chunk.js.map",
+    "main.css": "/Pathfinding-Algorithm-Visualizer/static/css/main.e35aacb7.chunk.css",
+    "main.js": "/Pathfinding-Algorithm-Visualizer/static/js/main.f2f02df1.chunk.js",
+    "main.js.map": "/Pathfinding-Algorithm-Visualizer/static/js/main.f2f02df1.chunk.js.map",
     "runtime-main.js": "/Pathfinding-Algorithm-Visualizer/static/js/runtime-main.cb167cee.js",
     "runtime-main.js.map": "/Pathfinding-Algorithm-Visualizer/static/js/runtime-main.cb167cee.js.map",
-    "static/js/2.93d25d46.chunk.js": "/Pathfinding-Algorithm-Visualizer/static/js/2.93d25d46.chunk.js",
-    "static/js/2.93d25d46.chunk.js.map": "/Pathfinding-Algorithm-Visualizer/static/js/2.93d25d46.chunk.js.map",
+    "static/js/2.e52017a1.chunk.js": "/Pathfinding-Algorithm-Visualizer/static/js/2.e52017a1.chunk.js",
+    "static/js/2.e52017a1.chunk.js.map": "/Pathfinding-Algorithm-Visualizer/static/js/2.e52017a1.chunk.js.map",
     "index.html": "/Pathfinding-Algorithm-Visualizer/index.html",
-    "precache-manifest.6b7a2abd801966fde4428c6a5645b488.js": "/Pathfinding-Algorithm-Visualizer/precache-manifest.6b7a2abd801966fde4428c6a5645b488.js",
+    "precache-manifest.956b25dbbf6454745c92aa0ffe7d6590.js": "/Pathfinding-Algorithm-Visualizer/precache-manifest.956b25dbbf6454745c92aa0ffe7d6590.js",
     "service-worker.js": "/Pathfinding-Algorithm-Visualizer/service-worker.js",
-    "static/css/main.3ad34645.chunk.css.map": "/Pathfinding-Algorithm-Visualizer/static/css/main.3ad34645.chunk.css.map",
-    "static/js/2.93d25d46.chunk.js.LICENSE.txt": "/Pathfinding-Algorithm-Visualizer/static/js/2.93d25d46.chunk.js.LICENSE.txt"
+    "static/css/main.e35aacb7.chunk.css.map": "/Pathfinding-Algorithm-Visualizer/static/css/main.e35aacb7.chunk.css.map",
+    "static/js/2.e52017a1.chunk.js.LICENSE.txt": "/Pathfinding-Algorithm-Visualizer/static/js/2.e52017a1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.cb167cee.js",
-    "static/js/2.93d25d46.chunk.js",
-    "static/css/main.3ad34645.chunk.css",
-    "static/js/main.be6d1956.chunk.js"
+    "static/js/2.e52017a1.chunk.js",
+    "static/css/main.e35aacb7.chunk.css",
+    "static/js/main.f2f02df1.chunk.js"
   ]
 }
