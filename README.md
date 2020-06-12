@@ -1,8 +1,26 @@
 # Pathfinding-Algorithm-Visualizer
 
-A personal project that is a visualization of different sorting algorithms
+Have you ever wondered what a pathfinding algorithm looks like in practice? This interactive tool will allow you to visualize different algorithms, and see how
+adding walls will change the behavior of the algorithm. If you want to see it in action, then head go to: https://jamesbting.github.io/Pathfinding-Algorithm-Visualizer/
 
+If you wish to set up this repository on your local machine, then follow the following steps:
 
+First, install NodeJS onto your computer (https://nodejs.org/en/download/). Then, ensure React Library is installed.
+
+Ensure that all npm modules have been installed. You will need the following libraries: material-ui, gh-pages.
+
+You can install the module by typing the following in the terminal:
+
+`npm install <package_name>`
+
+Clone the repository, then type: `npm start` in the browser of your choice. You should see a development version of the app, and any changes in the code base
+will be reflected in your browser.
+
+Once you are ready to deploy, run the following command:
+
+`npm run deploy`
+
+Then follow the instructions to push the deployed version to GitHub pages. Ensure to change the homepage value in the packge.json as appropriate.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
