@@ -29,7 +29,7 @@ function HideOnScroll(props) {
   );
 }
 
-export default function ButtonAppBar(props) {
+export default function TopBar(props) {
   const classes = useStyles();
 
   return (

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const options = ["Slow Speed", "Medium Speed", "Fast Speed"];
 
-export default function SimpleListMenu(props) {
+export default function SpeedMenu(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
