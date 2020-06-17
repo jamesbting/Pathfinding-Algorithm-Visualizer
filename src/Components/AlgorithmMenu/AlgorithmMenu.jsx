@@ -1,7 +1,7 @@
 // function that returns a div that is an algorithm menu, allowing the user to select an algorithm
 import Dijkstra from "../../Algorithms/Dijkstra.js";
 import ASearch from "../../Algorithms/ASearch";
-import DepthFirstSearchIterative from "../../Algorithms/DepthFirstSearchIterative";
+//import DepthFirstSearchIterative from "../../Algorithms/DepthFirstSearchIterative";
 import DepthFirstSearchRecursive from "../../Algorithms/DepthFirstSearchRecursive";
 import BreadthFirstSearch from "../../Algorithms/BreadthFirstSearch";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,10 +16,17 @@ import "./AlgorithmMenu.css";
 
 export default function AlgorithmMenu(props) {
   /* To add more items, simply import the algorithm, and add it to the algorithms array below  */
+  // const algorithms = [
+  //   new Dijkstra(),
+  //   new ASearch(),
+  //   new DepthFirstSearchIterative(),
+  //   new DepthFirstSearchRecursive(),
+  //   new BreadthFirstSearch(),
+  // ];
+
   const algorithms = [
     new Dijkstra(),
     new ASearch(),
-    new DepthFirstSearchIterative(),
     new DepthFirstSearchRecursive(),
     new BreadthFirstSearch(),
   ];
