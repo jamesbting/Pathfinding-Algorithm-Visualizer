@@ -26,7 +26,7 @@ export default class PathfindingVisualizer extends Component {
     const speed = this.state.speed;
     const generator = this.state.generator;
     return (
-      <div className="app">
+      <div className="App">
         {/* Make a top bar element */}
         <TopBar text={"Pathfinding Algorithm Visualizer"}></TopBar>
 
@@ -42,7 +42,7 @@ export default class PathfindingVisualizer extends Component {
         ></ButtonBox>
 
         {/* A sentence describing the algorithm */}
-        <div className="algorithm-description">
+        <div className="algorithmDescription">
           {`${algorithm.getAlgorithmDescription()} To learn more about ${algorithm.getAlgorithmName()}, click `}
           <a
             href={algorithm.getLink()}
