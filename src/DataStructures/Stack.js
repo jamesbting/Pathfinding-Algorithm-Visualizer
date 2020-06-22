@@ -1,3 +1,5 @@
+//custom stack class
+
 export default class Stack {
   constructor() {
     this.data = [];

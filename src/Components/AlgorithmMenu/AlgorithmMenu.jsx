@@ -15,18 +15,11 @@ import { Menu, MenuItem } from "@material-ui/core";
 import "./AlgorithmMenu.css";
 
 export default function AlgorithmMenu(props) {
-  /* To add more items, simply import the algorithm, and add it to the algorithms array below  */
-  // const algorithms = [
-  //   new Dijkstra(),
-  //   new ASearch(),
-  //   new DepthFirstSearchIterative(),
-  //   new DepthFirstSearchRecursive(),
-  //   new BreadthFirstSearch(),
-  // ];
-
+  /* To add more items, simply import the algorithm, and add it to the algorithms array below (make sure it extends the abstract algorithm class)  */
   const algorithms = [
     new Dijkstra(),
     new ASearch(),
+    /*new DepthFirstSearchIterative(),*/
     new DepthFirstSearchRecursive(),
     new BreadthFirstSearch(),
   ];

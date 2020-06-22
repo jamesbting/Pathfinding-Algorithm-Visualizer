@@ -1,10 +1,11 @@
 //this class represents a min heap
-//TODO: Fix the heap so that it works
+
 export default class Heap {
   constructor() {
     this.heap = [null]; // dummy element at index 0
   }
 
+  //get the first element in the heap
   get() {
     return this.heap[1];
   }
@@ -32,6 +33,7 @@ export default class Heap {
     }
   }
 
+  //remove the first element in the heap
   pop() {
     let smallest = this.heap[1];
 

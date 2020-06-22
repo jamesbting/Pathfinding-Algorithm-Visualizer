@@ -1,4 +1,6 @@
 //custom queue class
+//this could also be implemented using the Heap class, which would make it faster
+//however, we are not dealing with large numbers of elements, so using push and shift should suffice
 
 export class Queue {
   constructor(type) {
